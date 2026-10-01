@@ -1,0 +1,66 @@
+name: Release .NET SDK
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet build src/BarisCemant.Verimor/BarisCemant.Verimor.csproj -c Release
+      - run: dotnet build examples/Examples.csproj -c Release
+      - run: dotnet test tests/BarisCemant.Verimor.Tests -c Release
+
+  build:
+    needs: [quality]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: sh scripts/check-version.sh "${GITHUB_REF_NAME}"
+      - run: >-
+          dotnet pack src/BarisCemant.Verimor/BarisCemant.Verimor.csproj -c Release -o build/dist
+          -p:ContinuousIntegrationBuild=true
+      - run: |
+          sh scripts/test-consumer.sh build/dist net8.0
+          sh scripts/test-consumer.sh build/dist net10.0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: verimor-dotnet-${{ github.ref_name }}
+          path: build/dist/*
+          if-no-files-found: error
+
+  github-release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        with:
+          name: verimor-dotnet-${{ github.ref_name }}
+          path: release
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "${GITHUB_REF_NAME}" release/*
+          --verify-tag --title "Verimor .NET SDK ${GITHUB_REF_NAME}"
+          --notes-file CHANGELOG.md

@@ -1,0 +1,478 @@
+[
+  {
+    "method": "DELETE",
+    "operationId": "delete_v2_blacklists_id",
+    "path": "/v2/blacklists/{id}",
+    "product": "sms",
+    "proxy": "Blacklist.DeleteBlacklistEntryAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getSmsStatus",
+    "path": "/v2/status",
+    "product": "sms",
+    "proxy": "Reports.StatusAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "get_v2_balance",
+    "path": "/v2/balance",
+    "product": "sms",
+    "proxy": "Balances.BalanceAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "get_v2_blacklists",
+    "path": "/v2/blacklists",
+    "product": "sms",
+    "proxy": "Blacklist.ListBlacklistEntriesAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "get_v2_headers",
+    "path": "/v2/headers",
+    "product": "sms",
+    "proxy": "SenderIds.ListSenderIdsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "get_v2_inbound_messages",
+    "path": "/v2/inbound_messages",
+    "product": "sms",
+    "proxy": "Reports.ListInboundMessagesAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "get_v2_iys_campaigns",
+    "path": "/v2/iys/campaigns",
+    "product": "sms",
+    "proxy": "Iys.ListIysCampaignsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "get_v2_iys_campaigns_id_consents",
+    "path": "/v2/iys/campaigns/{id}/consents",
+    "product": "sms",
+    "proxy": "Iys.ListIysCampaignConsentsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "get_v2_send",
+    "path": "/v2/send",
+    "product": "sms",
+    "proxy": "Campaigns.SendLegacyAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "post_v2_blacklists",
+    "path": "/v2/blacklists",
+    "product": "sms",
+    "proxy": "Blacklist.AddBlacklistEntryAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "post_v2_cancel_id",
+    "path": "/v2/cancel/{id}",
+    "product": "sms",
+    "proxy": "Campaigns.CancelAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "post_v2_iys_consents_json",
+    "path": "/v2/iys_consents.json",
+    "product": "sms",
+    "proxy": "Iys.SubmitIysConsentsAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "sendSmsJson",
+    "path": "/v2/send.json",
+    "product": "sms",
+    "proxy": "Campaigns.SendAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "answerCall",
+    "path": "/answer/{id}",
+    "product": "switch",
+    "proxy": "Calls.AnswerLegacyAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "answerCallPost",
+    "path": "/answer",
+    "product": "switch",
+    "proxy": "Calls.AnswerAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createAnnouncement",
+    "path": "/announcements",
+    "product": "switch",
+    "proxy": "Announcements.CreateAnnouncementAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createBlockedNumber",
+    "path": "/blocked_numbers",
+    "product": "switch",
+    "proxy": "Blacklist.CreateBlockedNumberAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "createBridge",
+    "path": "/bridge",
+    "product": "switch",
+    "proxy": "Calls.BridgeAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createContact",
+    "path": "/contacts",
+    "product": "switch",
+    "proxy": "Contacts.CreateContactAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createContactGroup",
+    "path": "/contact_groups",
+    "product": "switch",
+    "proxy": "Contacts.CreateContactGroupAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "createDnd",
+    "path": "/dnd/{id}",
+    "product": "switch",
+    "proxy": "Users.SetDndAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createFaxDocumentUrl",
+    "path": "/fax_document_url",
+    "product": "switch",
+    "proxy": "Fax.CreateFaxDocumentUrlAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createFaxOrder",
+    "path": "/fax_orders",
+    "product": "switch",
+    "proxy": "Fax.CreateFaxOrderAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createIvrCampaign",
+    "path": "/ivr_campaigns.json",
+    "product": "switch",
+    "proxy": "IvrCampaigns.CreateIvrCampaignAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createRecordingUrl",
+    "path": "/recording_url",
+    "product": "switch",
+    "proxy": "Records.CreateRecordingUrlAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createVoicemailRecordingUrl",
+    "path": "/voicemail_recording_url",
+    "product": "switch",
+    "proxy": "Records.CreateVoicemailRecordingUrlAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "createWebphoneToken",
+    "path": "/webphone_tokens",
+    "product": "switch",
+    "proxy": "Users.CreateWebphoneTokenAsync"
+  },
+  {
+    "method": "DELETE",
+    "operationId": "deleteAnnouncement",
+    "path": "/announcements/{id}",
+    "product": "switch",
+    "proxy": "Announcements.DeleteAnnouncementAsync"
+  },
+  {
+    "method": "DELETE",
+    "operationId": "deleteBlockedNumber",
+    "path": "/blocked_numbers/delete",
+    "product": "switch",
+    "proxy": "Blacklist.DeleteBlockedNumberAsync"
+  },
+  {
+    "method": "DELETE",
+    "operationId": "deleteContact",
+    "path": "/contacts/{id}",
+    "product": "switch",
+    "proxy": "Contacts.DeleteContactAsync"
+  },
+  {
+    "method": "DELETE",
+    "operationId": "deleteContactGroup",
+    "path": "/contact_groups/{id}",
+    "product": "switch",
+    "proxy": "Contacts.DeleteContactGroupAsync"
+  },
+  {
+    "method": "DELETE",
+    "operationId": "deleteIvrCampaign",
+    "path": "/ivr_campaigns/{id}.json",
+    "product": "switch",
+    "proxy": "IvrCampaigns.DeleteIvrCampaignAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "downloadFaxDocument",
+    "path": "/fax_document/{id}",
+    "product": "switch",
+    "proxy": "Fax.DownloadFaxDocumentAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getAnnouncements",
+    "path": "/announcements",
+    "product": "switch",
+    "proxy": "Announcements.ListAnnouncementsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getCallerIds",
+    "path": "/caller_ids",
+    "product": "switch",
+    "proxy": "CallerIds.ListCallerIdsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getCdr",
+    "path": "/cdrs/{id}",
+    "product": "switch",
+    "proxy": "Records.GetCdrAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getCdrs",
+    "path": "/cdrs",
+    "product": "switch",
+    "proxy": "Records.ListCdrsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getCrmIntegrations",
+    "path": "/crm_integrations",
+    "product": "switch",
+    "proxy": "Crm.GetCrmIntegrationsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getExtension",
+    "path": "/extensions/{id}",
+    "product": "switch",
+    "proxy": "Users.GetExtensionAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getQueueUserList",
+    "path": "/queue/user_list",
+    "product": "switch",
+    "proxy": "Queues.ListQueueUsersAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getQueues",
+    "path": "/queues",
+    "product": "switch",
+    "proxy": "Queues.ListQueuesAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getQueuesPending",
+    "path": "/queues/pending",
+    "product": "switch",
+    "proxy": "Queues.ListQueuePendingCallsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "getVoicemailMessages",
+    "path": "/voicemail_messages",
+    "product": "switch",
+    "proxy": "Records.ListVoicemailMessagesAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "hangupCall",
+    "path": "/hangup/{id}",
+    "product": "switch",
+    "proxy": "Calls.HangupAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "listAgentStatuses",
+    "path": "/agent_statuses",
+    "product": "switch",
+    "proxy": "Users.ListAgentStatusesAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "listBlockedNumbers",
+    "path": "/blocked_numbers",
+    "product": "switch",
+    "proxy": "Blacklist.ListBlockedNumbersAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "listContactGroups",
+    "path": "/contact_groups",
+    "product": "switch",
+    "proxy": "Contacts.ListContactGroupsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "listContacts",
+    "path": "/contacts",
+    "product": "switch",
+    "proxy": "Contacts.ListContactsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "listExtensions",
+    "path": "/extensions",
+    "product": "switch",
+    "proxy": "Users.ListExtensionsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "listFaxOrders",
+    "path": "/fax_orders",
+    "product": "switch",
+    "proxy": "Fax.ListFaxOrdersAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "listFdrs",
+    "path": "/fdrs",
+    "product": "switch",
+    "proxy": "Fax.ListFaxRecordsAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "listUserStatuses",
+    "path": "/user_statuses",
+    "product": "switch",
+    "proxy": "Users.ListUserStatusesAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "manageQueueUsers",
+    "path": "/queue/manage_users",
+    "product": "switch",
+    "proxy": "Queues.ManageQueueUsersAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "muteCall",
+    "path": "/mute/{id}",
+    "product": "switch",
+    "proxy": "Calls.SetCallMuteAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "originateCall",
+    "path": "/originate",
+    "product": "switch",
+    "proxy": "Calls.OriginateLegacyAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "originateCallPost",
+    "path": "/originate",
+    "product": "switch",
+    "proxy": "Calls.OriginateAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "transferCall",
+    "path": "/transfer/{id}",
+    "product": "switch",
+    "proxy": "Calls.TransferLegacyAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "transferCallPost",
+    "path": "/transfer",
+    "product": "switch",
+    "proxy": "Calls.TransferAsync"
+  },
+  {
+    "method": "PATCH",
+    "operationId": "updateAnnouncement",
+    "path": "/announcements/{id}",
+    "product": "switch",
+    "proxy": "Announcements.UpdateAnnouncementAsync"
+  },
+  {
+    "method": "PATCH",
+    "operationId": "updateContact",
+    "path": "/contacts/{id}",
+    "product": "switch",
+    "proxy": "Contacts.UpdateContactAsync"
+  },
+  {
+    "method": "PATCH",
+    "operationId": "updateContactGroup",
+    "path": "/contact_groups/{id}",
+    "product": "switch",
+    "proxy": "Contacts.UpdateContactGroupAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "updateCrmIntegrations",
+    "path": "/crm_integrations",
+    "product": "switch",
+    "proxy": "Crm.UpdateCrmIntegrationsAsync"
+  },
+  {
+    "method": "PATCH",
+    "operationId": "updateIvrCampaign",
+    "path": "/ivr_campaigns/{id}.json",
+    "product": "switch",
+    "proxy": "IvrCampaigns.UpdateIvrCampaignAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "updateOutboundCallerId",
+    "path": "/update_outbound_caller_id",
+    "product": "switch",
+    "proxy": "CallerIds.UpdateOutboundCallerIdAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "webhookPayloadExamples",
+    "path": "/webhook-payload-examples",
+    "product": "switch",
+    "proxy": "Crm.GetWebhookPayloadExamplesAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "health_health_get",
+    "path": "/health",
+    "product": "whatsapp",
+    "proxy": "Health.HealthAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "send_otp_v1_messages_otp_post",
+    "path": "/v1/messages/otp",
+    "product": "whatsapp",
+    "proxy": "Messages.SendOtpAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "send_utility_v1_messages_utility_post",
+    "path": "/v1/messages/utility",
+    "product": "whatsapp",
+    "proxy": "Messages.SendUtilityAsync"
+  }
+]

@@ -1,0 +1,43 @@
+name: .NET CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dotnet-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet build src/BarisCemant.Verimor/BarisCemant.Verimor.csproj -c Release
+      - run: dotnet build examples/Examples.csproj -c Release
+      - run: dotnet test tests/BarisCemant.Verimor.Tests -c Release
+
+  package-consumer:
+    needs: [quality]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        framework: ["net8.0", "net10.0"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet pack src/BarisCemant.Verimor/BarisCemant.Verimor.csproj -c Release -o build/dist -p:ContinuousIntegrationBuild=true
+      - run: sh scripts/test-consumer.sh build/dist ${{ matrix.framework }}
