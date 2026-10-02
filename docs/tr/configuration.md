@@ -4,7 +4,7 @@ Her ürünün kendi seçenek sınıfı vardır ve hepsi `ClientOptions`'tan tür
 
 | Seçenek | Açıklama |
 | --- | --- |
-| `BaseUri` | Ürünün varsayılan adresini değiştirir (ör. yerel test sunucusu). |
+| `BaseUri` | Sunucu adresi. Varsayılan olarak ürünün Verimor adresidir; proxy gibi başka bir sunucu kullanmak için değiştirin. IP, port ve alt yol korunur. |
 | `Timeout` | İstek başına süre sınırı; varsayılan 30 saniye. Sıfır veya negatif değer reddedilir. |
 | `HttpClient` | Sizin yönettiğiniz istemci. SDK onu kapatmaz; `Timeout` ve varsayılan başlıklarına dokunmaz. |
 
