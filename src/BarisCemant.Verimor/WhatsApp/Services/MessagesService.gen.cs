@@ -19,6 +19,57 @@ namespace BarisCemant.Verimor.WhatsApp
             _core = core;
         }
 
+        /// <summary>GET /v1/messages/{message_ref}</summary>
+        public async Task<MessageDetailResponse> GetMessageAsync(
+            string messageRef,
+            CancellationToken cancellationToken = default)
+        {
+            if (messageRef == null) throw new ArgumentNullException(nameof(messageRef));
+            var verimorCall = new CallParts();
+            verimorCall.AddPath("message_ref", messageRef);
+            var verimorReply = await _core.SendAsync(RawOperations.GetMessageV1MessagesMessageRefGet, verimorCall, cancellationToken).ConfigureAwait(false);
+            return ResponseReader.Json<MessageDetailResponse>(verimorReply);
+        }
+
+        /// <summary>GET /v1/messages</summary>
+        public async Task<MessageListResponse> ListMessagesAsync(
+            string? to = null,
+            string? waMessageId = null,
+            string? status = null,
+            string? category = null,
+            string? templateName = null,
+            string? since = null,
+            string? until = null,
+            long? limit = null,
+            long? offset = null,
+            CancellationToken cancellationToken = default)
+        {
+            var verimorCall = new CallParts();
+            verimorCall.AddQuery("to", to);
+            verimorCall.AddQuery("wa_message_id", waMessageId);
+            verimorCall.AddQuery("status", status);
+            verimorCall.AddQuery("category", category);
+            verimorCall.AddQuery("template_name", templateName);
+            verimorCall.AddQuery("since", since);
+            verimorCall.AddQuery("until", until);
+            verimorCall.AddQuery("limit", limit);
+            verimorCall.AddQuery("offset", offset);
+            var verimorReply = await _core.SendAsync(RawOperations.ListMessagesV1MessagesGet, verimorCall, cancellationToken).ConfigureAwait(false);
+            return ResponseReader.Json<MessageListResponse>(verimorReply);
+        }
+
+        /// <summary>POST /v1/messages/bulk</summary>
+        public async Task<MessageResponse> SendBulkAsync(
+            BulkMessageRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            var verimorCall = new CallParts();
+            verimorCall.JsonBody = VerimorJson.Serialize(request);
+            var verimorReply = await _core.SendAsync(RawOperations.SendBulkV1MessagesBulkPost, verimorCall, cancellationToken).ConfigureAwait(false);
+            return ResponseReader.Json<MessageResponse>(verimorReply);
+        }
+
         /// <summary>POST /v1/messages/otp</summary>
         public async Task<MessageResponse> SendOtpAsync(
             TemplateMessageRequest request,

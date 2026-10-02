@@ -2,7 +2,7 @@
 
 [Türkçe](README.md)
 
-An independent community SDK for the Verimor SMS, Switch and WhatsApp APIs, targeting `netstandard2.0`. It runs on .NET Framework 4.6.2+, .NET 8 and .NET 10. All 68 operations are available through domain services and `Raw` access.
+An independent community SDK for the Verimor SMS, Switch and WhatsApp APIs, targeting `netstandard2.0`. It runs on .NET Framework 4.6.2+, .NET 8 and .NET 10. All 72 operations are available through domain services and `Raw` access.
 
 > This project is community-maintained and unofficial. It provides no support or compatibility guarantee on behalf of Verimor.
 >

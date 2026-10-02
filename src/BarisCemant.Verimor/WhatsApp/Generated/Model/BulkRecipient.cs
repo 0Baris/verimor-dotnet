@@ -28,44 +28,43 @@ using BarisCemant.Verimor.WhatsApp.Generated.Client;
 namespace BarisCemant.Verimor.WhatsApp.Generated.Model
 {
     /// <summary>
-    /// ValidationError
+    /// BulkRecipient
     /// </summary>
-    public partial class ValidationError : IValidatableObject
+    public partial class BulkRecipient : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ValidationError" /> class.
+        /// Initializes a new instance of the <see cref="BulkRecipient" /> class.
         /// </summary>
-        /// <param name="loc">loc</param>
-        /// <param name="msg">msg</param>
-        /// <param name="type">type</param>
+        /// <param name="to">to</param>
+        /// <param name="parameters">parameters</param>
         [JsonConstructor]
-        public ValidationError(List<LocationInner> loc, string msg, string type)
+        public BulkRecipient(string to, Option<List<string>?> parameters = default)
         {
-            Loc = loc;
-            Msg = msg;
-            Type = type;
+            To = to;
+            ParametersOption = parameters;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Loc
+        /// Gets or Sets To
         /// </summary>
-        [JsonPropertyName("loc")]
-        public List<LocationInner> Loc { get; set; }
+        [JsonPropertyName("to")]
+        public string To { get; set; }
 
         /// <summary>
-        /// Gets or Sets Msg
+        /// Used to track the state of Parameters
         /// </summary>
-        [JsonPropertyName("msg")]
-        public string Msg { get; set; }
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<string>?> ParametersOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Type
+        /// Gets or Sets Parameters
         /// </summary>
-        [JsonPropertyName("type")]
-        public string Type { get; set; }
+        [JsonPropertyName("parameters")]
+        public List<string>? Parameters { get { return this.ParametersOption; } set { this.ParametersOption = new Option<List<string>?>(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -74,10 +73,9 @@ namespace BarisCemant.Verimor.WhatsApp.Generated.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ValidationError {\n");
-            sb.Append("  Loc: ").Append(Loc).Append("\n");
-            sb.Append("  Msg: ").Append(Msg).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("class BulkRecipient {\n");
+            sb.Append("  To: ").Append(To).Append("\n");
+            sb.Append("  Parameters: ").Append(Parameters).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,19 +92,19 @@ namespace BarisCemant.Verimor.WhatsApp.Generated.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ValidationError" />
+    /// A Json converter for type <see cref="BulkRecipient" />
     /// </summary>
-    public class ValidationErrorJsonConverter : JsonConverter<ValidationError>
+    public class BulkRecipientJsonConverter : JsonConverter<BulkRecipient>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ValidationError" />
+        /// Deserializes json to <see cref="BulkRecipient" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ValidationError Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override BulkRecipient Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -115,9 +113,8 @@ namespace BarisCemant.Verimor.WhatsApp.Generated.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<List<LocationInner>?> loc = default;
-            Option<string?> msg = default;
-            Option<string?> type = default;
+            Option<string?> to = default;
+            Option<List<string>?> parameters = default;
 
             while (utf8JsonReader.Read())
             {
@@ -134,14 +131,11 @@ namespace BarisCemant.Verimor.WhatsApp.Generated.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "loc":
-                            loc = new Option<List<LocationInner>?>(JsonSerializer.Deserialize<List<LocationInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "to":
+                            to = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "msg":
-                            msg = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
-                        case "type":
-                            type = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "parameters":
+                            parameters = new Option<List<string>?>(JsonSerializer.Deserialize<List<string>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -149,65 +143,52 @@ namespace BarisCemant.Verimor.WhatsApp.Generated.Model
                 }
             }
 
-            if (!loc.IsSet)
-                throw new ArgumentException("Property is required for class ValidationError.", nameof(loc));
+            if (!to.IsSet)
+                throw new ArgumentException("Property is required for class BulkRecipient.", nameof(to));
 
-            if (!msg.IsSet)
-                throw new ArgumentException("Property is required for class ValidationError.", nameof(msg));
+            if (to.IsSet && to.Value == null)
+                throw new ArgumentNullException(nameof(to), "Property is not nullable for class BulkRecipient.");
 
-            if (!type.IsSet)
-                throw new ArgumentException("Property is required for class ValidationError.", nameof(type));
-
-            if (loc.IsSet && loc.Value == null)
-                throw new ArgumentNullException(nameof(loc), "Property is not nullable for class ValidationError.");
-
-            if (msg.IsSet && msg.Value == null)
-                throw new ArgumentNullException(nameof(msg), "Property is not nullable for class ValidationError.");
-
-            if (type.IsSet && type.Value == null)
-                throw new ArgumentNullException(nameof(type), "Property is not nullable for class ValidationError.");
-
-            return new ValidationError(loc.Value!, msg.Value!, type.Value!);
+            return new BulkRecipient(to.Value!, parameters);
         }
 
         /// <summary>
-        /// Serializes a <see cref="ValidationError" />
+        /// Serializes a <see cref="BulkRecipient" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="validationError"></param>
+        /// <param name="bulkRecipient"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ValidationError validationError, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, BulkRecipient bulkRecipient, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, validationError, jsonSerializerOptions);
+            WriteProperties(writer, bulkRecipient, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ValidationError" />
+        /// Serializes the properties of <see cref="BulkRecipient" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="validationError"></param>
+        /// <param name="bulkRecipient"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ValidationError validationError, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, BulkRecipient bulkRecipient, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (validationError.Loc == null)
-                throw new ArgumentNullException(nameof(validationError.Loc), "Property is required for class ValidationError.");
+            if (bulkRecipient.To == null)
+                throw new ArgumentNullException(nameof(bulkRecipient.To), "Property is required for class BulkRecipient.");
 
-            if (validationError.Msg == null)
-                throw new ArgumentNullException(nameof(validationError.Msg), "Property is required for class ValidationError.");
+            writer.WriteString("to", bulkRecipient.To);
 
-            if (validationError.Type == null)
-                throw new ArgumentNullException(nameof(validationError.Type), "Property is required for class ValidationError.");
-
-            writer.WritePropertyName("loc");
-            JsonSerializer.Serialize(writer, validationError.Loc, jsonSerializerOptions);
-            writer.WriteString("msg", validationError.Msg);
-
-            writer.WriteString("type", validationError.Type);
+            if (bulkRecipient.ParametersOption.IsSet)
+                if (bulkRecipient.ParametersOption.Value != null)
+                {
+                    writer.WritePropertyName("parameters");
+                    JsonSerializer.Serialize(writer, bulkRecipient.Parameters, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("parameters");
         }
     }
 }

@@ -9,3 +9,5 @@ Console.WriteLine($"{otp.Id} {otp.Status}");
 ```
 
 Message endpoints return `202 Accepted`. If the body is not the expected `MessageResponse`, `UnexpectedResponseException` is raised. `Health.HealthAsync()` sends no credentials.
+
+`Messages` also offers `SendBulkAsync(BulkMessageRequest)` for one template to up to 10,000 recipients, `ListMessagesAsync(...)` to filter sent messages and `GetMessageAsync(messageRef)` for one message's current status.

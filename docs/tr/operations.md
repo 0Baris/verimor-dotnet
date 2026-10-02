@@ -1,6 +1,6 @@
 # .NET SDK operasyonları
 
-Bu tablo normalize edilmiş 68 Verimor operasyonunun public .NET servis karşılığını listeler.
+Bu tablo normalize edilmiş 72 Verimor operasyonunun public .NET servis karşılığını listeler.
 
 | Ürün | HTTP | Yol | Operation ID | .NET servis |
 | --- | --- | --- | --- | --- |
@@ -16,6 +16,7 @@ Bu tablo normalize edilmiş 68 Verimor operasyonunun public .NET servis karşıl
 | sms | `POST` | `/v2/blacklists` | `post_v2_blacklists` | `Blacklist.AddBlacklistEntryAsync` |
 | sms | `POST` | `/v2/cancel/{id}` | `post_v2_cancel_id` | `Campaigns.CancelAsync` |
 | sms | `POST` | `/v2/iys_consents.json` | `post_v2_iys_consents_json` | `Iys.SubmitIysConsentsAsync` |
+| sms | `POST` | `/v2/otp` | `sendOtp` | `Campaigns.SendOtpAsync` |
 | sms | `POST` | `/v2/send.json` | `sendSmsJson` | `Campaigns.SendAsync` |
 | switch | `GET` | `/answer/{id}` | `answerCall` | `Calls.AnswerLegacyAsync` |
 | switch | `POST` | `/answer` | `answerCallPost` | `Calls.AnswerAsync` |
@@ -69,6 +70,9 @@ Bu tablo normalize edilmiş 68 Verimor operasyonunun public .NET servis karşıl
 | switch | `PATCH` | `/ivr_campaigns/{id}.json` | `updateIvrCampaign` | `IvrCampaigns.UpdateIvrCampaignAsync` |
 | switch | `GET` | `/update_outbound_caller_id` | `updateOutboundCallerId` | `CallerIds.UpdateOutboundCallerIdAsync` |
 | switch | `GET` | `/webhook-payload-examples` | `webhookPayloadExamples` | `Crm.GetWebhookPayloadExamplesAsync` |
+| whatsapp | `GET` | `/v1/messages/{message_ref}` | `get_message_v1_messages__message_ref__get` | `Messages.GetMessageAsync` |
 | whatsapp | `GET` | `/health` | `health_health_get` | `Health.HealthAsync` |
+| whatsapp | `GET` | `/v1/messages` | `list_messages_v1_messages_get` | `Messages.ListMessagesAsync` |
+| whatsapp | `POST` | `/v1/messages/bulk` | `send_bulk_v1_messages_bulk_post` | `Messages.SendBulkAsync` |
 | whatsapp | `POST` | `/v1/messages/otp` | `send_otp_v1_messages_otp_post` | `Messages.SendOtpAsync` |
 | whatsapp | `POST` | `/v1/messages/utility` | `send_utility_v1_messages_utility_post` | `Messages.SendUtilityAsync` |

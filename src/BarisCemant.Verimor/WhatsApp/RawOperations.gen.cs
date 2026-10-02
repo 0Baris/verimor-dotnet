@@ -6,12 +6,36 @@ namespace BarisCemant.Verimor.WhatsApp
 {
     internal static class RawOperations
     {
+        public static readonly RawOperation GetMessageV1MessagesMessageRefGet =
+            new RawOperation(
+                "get_message_v1_messages__message_ref__get",
+                "GET",
+                "/v1/messages/{message_ref}",
+                new Dictionary<string, string> { ["x-api-key"] = "header" },
+                null);
+
         public static readonly RawOperation HealthHealthGet =
             new RawOperation(
                 "health_health_get",
                 "GET",
                 "/health",
                 new Dictionary<string, string> { },
+                null);
+
+        public static readonly RawOperation ListMessagesV1MessagesGet =
+            new RawOperation(
+                "list_messages_v1_messages_get",
+                "GET",
+                "/v1/messages",
+                new Dictionary<string, string> { ["x-api-key"] = "header" },
+                null);
+
+        public static readonly RawOperation SendBulkV1MessagesBulkPost =
+            new RawOperation(
+                "send_bulk_v1_messages_bulk_post",
+                "POST",
+                "/v1/messages/bulk",
+                new Dictionary<string, string> { ["x-api-key"] = "header" },
                 null);
 
         public static readonly RawOperation SendOtpV1MessagesOtpPost =
@@ -32,7 +56,10 @@ namespace BarisCemant.Verimor.WhatsApp
 
         public static readonly IReadOnlyList<RawOperation> All = new RawOperation[]
         {
+            GetMessageV1MessagesMessageRefGet,
             HealthHealthGet,
+            ListMessagesV1MessagesGet,
+            SendBulkV1MessagesBulkPost,
             SendOtpV1MessagesOtpPost,
             SendUtilityV1MessagesUtilityPost,
         };

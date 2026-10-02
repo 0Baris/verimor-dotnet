@@ -16,14 +16,14 @@ namespace BarisCemant.Verimor.Tests
             => Contract.Load().Select(o => new object[] { o.Product, o.OperationId, o.Proxy, o.Method, o.Path });
 
         [Fact]
-        public void The_contract_lists_all_68_operations()
+        public void The_contract_lists_all_72_operations()
         {
             var operations = Contract.Load();
-            Assert.Equal(68, operations.Count);
-            Assert.Equal(13, operations.Count(o => o.Product == "sms"));
+            Assert.Equal(72, operations.Count);
+            Assert.Equal(14, operations.Count(o => o.Product == "sms"));
             Assert.Equal(52, operations.Count(o => o.Product == "switch"));
-            Assert.Equal(3, operations.Count(o => o.Product == "whatsapp"));
-            Assert.Equal(68, operations.Select(o => (o.Product, o.Proxy)).Distinct().Count());
+            Assert.Equal(6, operations.Count(o => o.Product == "whatsapp"));
+            Assert.Equal(72, operations.Select(o => (o.Product, o.Proxy)).Distinct().Count());
         }
 
         [Theory]
@@ -89,9 +89,9 @@ namespace BarisCemant.Verimor.Tests
             }
 
             Assert.Equal(10, Count("sms", "query"));
-            Assert.Equal(3, Count("sms", "body"));
+            Assert.Equal(4, Count("sms", "body"));
             Assert.Equal(50, Count("switch", "query"));
-            Assert.Equal(2, Count("whatsapp", "header"));
+            Assert.Equal(5, Count("whatsapp", "header"));
         }
     }
 }

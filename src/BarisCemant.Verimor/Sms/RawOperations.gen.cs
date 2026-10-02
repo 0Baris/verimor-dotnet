@@ -102,6 +102,14 @@ namespace BarisCemant.Verimor.Sms
                 new Dictionary<string, string> { ["password"] = "body", ["username"] = "body" },
                 "body");
 
+        public static readonly RawOperation SendOtp =
+            new RawOperation(
+                "sendOtp",
+                "POST",
+                "/v2/otp",
+                new Dictionary<string, string> { ["password"] = "body", ["username"] = "body" },
+                null);
+
         public static readonly RawOperation SendSmsJson =
             new RawOperation(
                 "sendSmsJson",
@@ -124,6 +132,7 @@ namespace BarisCemant.Verimor.Sms
             PostV2Blacklists,
             PostV2CancelId,
             PostV2IysConsentsJson,
+            SendOtp,
             SendSmsJson,
         };
     }
