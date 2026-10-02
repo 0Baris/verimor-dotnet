@@ -72,5 +72,17 @@ namespace BarisCemant.Verimor.Sms
             var verimorReply = await _core.SendAsync(RawOperations.GetV2Send, verimorCall, cancellationToken).ConfigureAwait(false);
             return ResponseReader.Text(verimorReply);
         }
+
+        /// <summary>POST /v2/otp</summary>
+        public async Task<string> SendOtpAsync(
+            OtpRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            var verimorCall = new CallParts();
+            verimorCall.JsonBody = VerimorJson.Serialize(request);
+            var verimorReply = await _core.SendAsync(RawOperations.SendOtp, verimorCall, cancellationToken).ConfigureAwait(false);
+            return ResponseReader.Text(verimorReply);
+        }
     }
 }

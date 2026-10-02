@@ -85,6 +85,13 @@
   },
   {
     "method": "POST",
+    "operationId": "sendOtp",
+    "path": "/v2/otp",
+    "product": "sms",
+    "proxy": "Campaigns.SendOtpAsync"
+  },
+  {
+    "method": "POST",
     "operationId": "sendSmsJson",
     "path": "/v2/send.json",
     "product": "sms",
@@ -456,10 +463,31 @@
   },
   {
     "method": "GET",
+    "operationId": "get_message_v1_messages__message_ref__get",
+    "path": "/v1/messages/{message_ref}",
+    "product": "whatsapp",
+    "proxy": "Messages.GetMessageAsync"
+  },
+  {
+    "method": "GET",
     "operationId": "health_health_get",
     "path": "/health",
     "product": "whatsapp",
     "proxy": "Health.HealthAsync"
+  },
+  {
+    "method": "GET",
+    "operationId": "list_messages_v1_messages_get",
+    "path": "/v1/messages",
+    "product": "whatsapp",
+    "proxy": "Messages.ListMessagesAsync"
+  },
+  {
+    "method": "POST",
+    "operationId": "send_bulk_v1_messages_bulk_post",
+    "path": "/v1/messages/bulk",
+    "product": "whatsapp",
+    "proxy": "Messages.SendBulkAsync"
   },
   {
     "method": "POST",

@@ -9,3 +9,5 @@ Console.WriteLine($"{otp.Id} {otp.Status}");
 ```
 
 Mesaj uçları `202 Accepted` döner. Gövde beklenen `MessageResponse` şeklinde değilse `UnexpectedResponseException` atılır. `Health.HealthAsync()` kimlik bilgisi göndermez.
+
+`Messages` ayrıca tek şablonu en fazla 10.000 alıcıya kuyruğa alan `SendBulkAsync(BulkMessageRequest)`, gönderilen mesajları filtreleyen `ListMessagesAsync(...)` ve tek mesajın güncel durumunu döndüren `GetMessageAsync(messageRef)` metotlarını sunar.

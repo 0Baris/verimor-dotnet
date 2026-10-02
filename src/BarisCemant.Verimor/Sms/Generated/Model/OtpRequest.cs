@@ -27,47 +27,124 @@ using BarisCemant.Verimor.Sms.Generated.Client;
 namespace BarisCemant.Verimor.Sms.Generated.Model
 {
     /// <summary>
-    /// SendSmsJsonRequest
+    /// /v2/otp istek gövdesi. code ve msg alanlarından en az biri zorunludur.
     /// </summary>
-    public partial class SendSmsJsonRequest : IValidatableObject
+    public partial class OtpRequest : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SendSmsJsonRequest" /> class.
+        /// Initializes a new instance of the <see cref="OtpRequest" /> class.
         /// </summary>
         /// <param name="username">API kullanıcı adı</param>
         /// <param name="password">API şifresi</param>
-        /// <param name="messages">messages</param>
-        /// <param name="sourceAddr">Gönderici başlığı</param>
-        /// <param name="validFor">Mesajın geçerlilik süresi. SS:DD (veya S:DD) formatında olmalı. (Varsayılan değer 24:00, Minimum değer 00:01, Maksimum değer 48:00)</param>
-        /// <param name="datacoding">Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode)</param>
-        /// <param name="isCommercial">Ticari mesaj mı</param>
-        /// <param name="iysRecipientType">İYS alıcı tipi (BIREYSEL/TACIR)</param>
-        /// <param name="sendAt">Gönderim zamanı (ISO 8601 formatında). Boş ise mesaj hemen gönderilir.</param>
-        /// <param name="customId">Özel kampanya ID&#39;si</param>
-        /// <param name="addRet">true ise gönderici başlığına ait ret bildirimi (&#39;Ret: ...&#39;) her mesajın sonuna otomatik eklenir. Yalnızca bu (POST/JSON) yönteminde geçerlidir.</param>
+        /// <param name="dest">Mesajın gönderileceği tek alıcı numarası. Virgülle ayrılmış birden fazla numara gönderilirse MULTIPLE_DESTINATION_NOT_ALLOWED döner.</param>
+        /// <param name="header">Gönderici başlığı. /v2/send.json&#39;daki source_addr ile aynı doğrulamadan geçer. Gönderilmezse hesabın varsayılan başlığı kullanılır.</param>
+        /// <param name="code">Doğrulama kodu. msg gönderilmezse lang ile seçilen şablondan mesaj üretilir; msg içinde {code} geçiyorsa onun yerine yazılır. (code veya msg&#39;den en az biri zorunlu)</param>
+        /// <param name="msg">Serbest mesaj metni. Gönderilirse şablon yerine kullanılır; içindeki {code} yer tutucusu code ile doldurulur. {code} varsa code zorunludur (aksi halde MISSING_CODE). (code veya msg&#39;den en az biri zorunlu)</param>
+        /// <param name="lang">Şablon dili. Desteklenmeyen değerlerde tr kullanılır. Yalnızca code ile üretilen şablonu etkiler; msg gönderildiğinde etkisi yoktur. (default to LangEnum.Tr)</param>
+        /// <param name="customId">Özel kampanya ID&#39;si. Raporlarda campaign_custom_id olarak döner.</param>
+        /// <param name="datacoding">Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode). Gönderilmezse mesaj metnine göre otomatik belirlenir.</param>
         [JsonConstructor]
-        public SendSmsJsonRequest(string username, string password, List<SendSmsJsonRequestMessagesInner> messages, Option<string?> sourceAddr = default, Option<string?> validFor = default, Option<DatacodingEnum?> datacoding = default, Option<bool?> isCommercial = default, Option<string?> iysRecipientType = default, Option<string?> sendAt = default, Option<string?> customId = default, Option<bool?> addRet = default)
+        public OtpRequest(string username, string password, string dest, Option<string?> header = default, Option<string?> code = default, Option<string?> msg = default, Option<LangEnum?> lang = default, Option<string?> customId = default, Option<DatacodingEnum?> datacoding = default)
         {
             Username = username;
             Password = password;
-            Messages = messages;
-            SourceAddrOption = sourceAddr;
-            ValidForOption = validFor;
-            DatacodingOption = datacoding;
-            IsCommercialOption = isCommercial;
-            IysRecipientTypeOption = iysRecipientType;
-            SendAtOption = sendAt;
+            Dest = dest;
+            HeaderOption = header;
+            CodeOption = code;
+            MsgOption = msg;
+            LangOption = lang;
             CustomIdOption = customId;
-            AddRetOption = addRet;
+            DatacodingOption = datacoding;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode)
+        /// Şablon dili. Desteklenmeyen değerlerde tr kullanılır. Yalnızca code ile üretilen şablonu etkiler; msg gönderildiğinde etkisi yoktur.
         /// </summary>
-        /// <value>Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode)</value>
+        /// <value>Şablon dili. Desteklenmeyen değerlerde tr kullanılır. Yalnızca code ile üretilen şablonu etkiler; msg gönderildiğinde etkisi yoktur.</value>
+        public enum LangEnum
+        {
+            /// <summary>
+            /// Enum Tr for value: tr
+            /// </summary>
+            Tr = 1,
+
+            /// <summary>
+            /// Enum En for value: en
+            /// </summary>
+            En = 2
+        }
+
+        /// <summary>
+        /// Returns a <see cref="LangEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static LangEnum LangEnumFromString(string value)
+        {
+            if (value.Equals("tr"))
+                return LangEnum.Tr;
+
+            if (value.Equals("en"))
+                return LangEnum.En;
+
+            throw new NotImplementedException($"Could not convert value to type LangEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="LangEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static LangEnum? LangEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("tr"))
+                return LangEnum.Tr;
+
+            if (value.Equals("en"))
+                return LangEnum.En;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="LangEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string LangEnumToJsonValue(LangEnum? value)
+        {
+            if (value == LangEnum.Tr)
+                return "tr";
+
+            if (value == LangEnum.En)
+                return "en";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Used to track the state of Lang
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<LangEnum?> LangOption { get; private set; }
+
+        /// <summary>
+        /// Şablon dili. Desteklenmeyen değerlerde tr kullanılır. Yalnızca code ile üretilen şablonu etkiler; msg gönderildiğinde etkisi yoktur.
+        /// </summary>
+        /// <value>Şablon dili. Desteklenmeyen değerlerde tr kullanılır. Yalnızca code ile üretilen şablonu etkiler; msg gönderildiğinde etkisi yoktur.</value>
+        [JsonPropertyName("lang")]
+        public LangEnum? Lang { get { return this.LangOption; } set { this.LangOption = new Option<LangEnum?>(value); } }
+
+        /// <summary>
+        /// Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode). Gönderilmezse mesaj metnine göre otomatik belirlenir.
+        /// </summary>
+        /// <value>Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode). Gönderilmezse mesaj metnine göre otomatik belirlenir.</value>
         public enum DatacodingEnum
         {
             /// <summary>
@@ -143,9 +220,9 @@ namespace BarisCemant.Verimor.Sms.Generated.Model
         public Option<DatacodingEnum?> DatacodingOption { get; private set; }
 
         /// <summary>
-        /// Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode)
+        /// Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode). Gönderilmezse mesaj metnine göre otomatik belirlenir.
         /// </summary>
-        /// <value>Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode)</value>
+        /// <value>Mesaj metni için kullanılacak karakter kodlaması (0: Normal, 1: Türkçe, 2: Unicode). Gönderilmezse mesaj metnine göre otomatik belirlenir.</value>
         [JsonPropertyName("datacoding")]
         public DatacodingEnum? Datacoding { get { return this.DatacodingOption; } set { this.DatacodingOption = new Option<DatacodingEnum?>(value); } }
 
@@ -164,80 +241,53 @@ namespace BarisCemant.Verimor.Sms.Generated.Model
         public string Password { get; set; }
 
         /// <summary>
-        /// Gets or Sets Messages
+        /// Mesajın gönderileceği tek alıcı numarası. Virgülle ayrılmış birden fazla numara gönderilirse MULTIPLE_DESTINATION_NOT_ALLOWED döner.
         /// </summary>
-        [JsonPropertyName("messages")]
-        public List<SendSmsJsonRequestMessagesInner> Messages { get; set; }
+        /// <value>Mesajın gönderileceği tek alıcı numarası. Virgülle ayrılmış birden fazla numara gönderilirse MULTIPLE_DESTINATION_NOT_ALLOWED döner.</value>
+        [JsonPropertyName("dest")]
+        public string Dest { get; set; }
 
         /// <summary>
-        /// Used to track the state of SourceAddr
+        /// Used to track the state of Header
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> SourceAddrOption { get; private set; }
+        public Option<string?> HeaderOption { get; private set; }
 
         /// <summary>
-        /// Gönderici başlığı
+        /// Gönderici başlığı. /v2/send.json&#39;daki source_addr ile aynı doğrulamadan geçer. Gönderilmezse hesabın varsayılan başlığı kullanılır.
         /// </summary>
-        /// <value>Gönderici başlığı</value>
-        [JsonPropertyName("source_addr")]
-        public string? SourceAddr { get { return this.SourceAddrOption; } set { this.SourceAddrOption = new Option<string?>(value); } }
+        /// <value>Gönderici başlığı. /v2/send.json&#39;daki source_addr ile aynı doğrulamadan geçer. Gönderilmezse hesabın varsayılan başlığı kullanılır.</value>
+        [JsonPropertyName("header")]
+        public string? Header { get { return this.HeaderOption; } set { this.HeaderOption = new Option<string?>(value); } }
 
         /// <summary>
-        /// Used to track the state of ValidFor
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ValidForOption { get; private set; }
-
-        /// <summary>
-        /// Mesajın geçerlilik süresi. SS:DD (veya S:DD) formatında olmalı. (Varsayılan değer 24:00, Minimum değer 00:01, Maksimum değer 48:00)
-        /// </summary>
-        /// <value>Mesajın geçerlilik süresi. SS:DD (veya S:DD) formatında olmalı. (Varsayılan değer 24:00, Minimum değer 00:01, Maksimum değer 48:00)</value>
-        [JsonPropertyName("valid_for")]
-        public string? ValidFor { get { return this.ValidForOption; } set { this.ValidForOption = new Option<string?>(value); } }
-
-        /// <summary>
-        /// Used to track the state of IsCommercial
+        /// Used to track the state of Code
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> IsCommercialOption { get; private set; }
+        public Option<string?> CodeOption { get; private set; }
 
         /// <summary>
-        /// Ticari mesaj mı
+        /// Doğrulama kodu. msg gönderilmezse lang ile seçilen şablondan mesaj üretilir; msg içinde {code} geçiyorsa onun yerine yazılır. (code veya msg&#39;den en az biri zorunlu)
         /// </summary>
-        /// <value>Ticari mesaj mı</value>
-        [JsonPropertyName("is_commercial")]
-        public bool? IsCommercial { get { return this.IsCommercialOption; } set { this.IsCommercialOption = new Option<bool?>(value); } }
+        /// <value>Doğrulama kodu. msg gönderilmezse lang ile seçilen şablondan mesaj üretilir; msg içinde {code} geçiyorsa onun yerine yazılır. (code veya msg&#39;den en az biri zorunlu)</value>
+        [JsonPropertyName("code")]
+        public string? Code { get { return this.CodeOption; } set { this.CodeOption = new Option<string?>(value); } }
 
         /// <summary>
-        /// Used to track the state of IysRecipientType
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> IysRecipientTypeOption { get; private set; }
-
-        /// <summary>
-        /// İYS alıcı tipi (BIREYSEL/TACIR)
-        /// </summary>
-        /// <value>İYS alıcı tipi (BIREYSEL/TACIR)</value>
-        [JsonPropertyName("iys_recipient_type")]
-        public string? IysRecipientType { get { return this.IysRecipientTypeOption; } set { this.IysRecipientTypeOption = new Option<string?>(value); } }
-
-        /// <summary>
-        /// Used to track the state of SendAt
+        /// Used to track the state of Msg
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> SendAtOption { get; private set; }
+        public Option<string?> MsgOption { get; private set; }
 
         /// <summary>
-        /// Gönderim zamanı (ISO 8601 formatında). Boş ise mesaj hemen gönderilir.
+        /// Serbest mesaj metni. Gönderilirse şablon yerine kullanılır; içindeki {code} yer tutucusu code ile doldurulur. {code} varsa code zorunludur (aksi halde MISSING_CODE). (code veya msg&#39;den en az biri zorunlu)
         /// </summary>
-        /// <value>Gönderim zamanı (ISO 8601 formatında). Boş ise mesaj hemen gönderilir.</value>
-        [JsonPropertyName("send_at")]
-        public string? SendAt { get { return this.SendAtOption; } set { this.SendAtOption = new Option<string?>(value); } }
+        /// <value>Serbest mesaj metni. Gönderilirse şablon yerine kullanılır; içindeki {code} yer tutucusu code ile doldurulur. {code} varsa code zorunludur (aksi halde MISSING_CODE). (code veya msg&#39;den en az biri zorunlu)</value>
+        [JsonPropertyName("msg")]
+        public string? Msg { get { return this.MsgOption; } set { this.MsgOption = new Option<string?>(value); } }
 
         /// <summary>
         /// Used to track the state of CustomId
@@ -247,25 +297,11 @@ namespace BarisCemant.Verimor.Sms.Generated.Model
         public Option<string?> CustomIdOption { get; private set; }
 
         /// <summary>
-        /// Özel kampanya ID&#39;si
+        /// Özel kampanya ID&#39;si. Raporlarda campaign_custom_id olarak döner.
         /// </summary>
-        /// <value>Özel kampanya ID&#39;si</value>
+        /// <value>Özel kampanya ID&#39;si. Raporlarda campaign_custom_id olarak döner.</value>
         [JsonPropertyName("custom_id")]
         public string? CustomId { get { return this.CustomIdOption; } set { this.CustomIdOption = new Option<string?>(value); } }
-
-        /// <summary>
-        /// Used to track the state of AddRet
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> AddRetOption { get; private set; }
-
-        /// <summary>
-        /// true ise gönderici başlığına ait ret bildirimi (&#39;Ret: ...&#39;) her mesajın sonuna otomatik eklenir. Yalnızca bu (POST/JSON) yönteminde geçerlidir.
-        /// </summary>
-        /// <value>true ise gönderici başlığına ait ret bildirimi (&#39;Ret: ...&#39;) her mesajın sonuna otomatik eklenir. Yalnızca bu (POST/JSON) yönteminde geçerlidir.</value>
-        [JsonPropertyName("add_ret")]
-        public bool? AddRet { get { return this.AddRetOption; } set { this.AddRetOption = new Option<bool?>(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -274,18 +310,16 @@ namespace BarisCemant.Verimor.Sms.Generated.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class SendSmsJsonRequest {\n");
+            sb.Append("class OtpRequest {\n");
             sb.Append("  Username: ").Append(Username).Append("\n");
             sb.Append("  Password: ").Append(Password).Append("\n");
-            sb.Append("  Messages: ").Append(Messages).Append("\n");
-            sb.Append("  SourceAddr: ").Append(SourceAddr).Append("\n");
-            sb.Append("  ValidFor: ").Append(ValidFor).Append("\n");
-            sb.Append("  Datacoding: ").Append(Datacoding).Append("\n");
-            sb.Append("  IsCommercial: ").Append(IsCommercial).Append("\n");
-            sb.Append("  IysRecipientType: ").Append(IysRecipientType).Append("\n");
-            sb.Append("  SendAt: ").Append(SendAt).Append("\n");
+            sb.Append("  Dest: ").Append(Dest).Append("\n");
+            sb.Append("  Header: ").Append(Header).Append("\n");
+            sb.Append("  Code: ").Append(Code).Append("\n");
+            sb.Append("  Msg: ").Append(Msg).Append("\n");
+            sb.Append("  Lang: ").Append(Lang).Append("\n");
             sb.Append("  CustomId: ").Append(CustomId).Append("\n");
-            sb.Append("  AddRet: ").Append(AddRet).Append("\n");
+            sb.Append("  Datacoding: ").Append(Datacoding).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -308,19 +342,19 @@ namespace BarisCemant.Verimor.Sms.Generated.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="SendSmsJsonRequest" />
+    /// A Json converter for type <see cref="OtpRequest" />
     /// </summary>
-    public class SendSmsJsonRequestJsonConverter : JsonConverter<SendSmsJsonRequest>
+    public class OtpRequestJsonConverter : JsonConverter<OtpRequest>
     {
         /// <summary>
-        /// Deserializes json to <see cref="SendSmsJsonRequest" />
+        /// Deserializes json to <see cref="OtpRequest" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override SendSmsJsonRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override OtpRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -331,15 +365,13 @@ namespace BarisCemant.Verimor.Sms.Generated.Model
 
             Option<string?> username = default;
             Option<string?> password = default;
-            Option<List<SendSmsJsonRequestMessagesInner>?> messages = default;
-            Option<string?> sourceAddr = default;
-            Option<string?> validFor = default;
-            Option<SendSmsJsonRequest.DatacodingEnum?> datacoding = default;
-            Option<bool?> isCommercial = default;
-            Option<string?> iysRecipientType = default;
-            Option<string?> sendAt = default;
+            Option<string?> dest = default;
+            Option<string?> header = default;
+            Option<string?> code = default;
+            Option<string?> msg = default;
+            Option<OtpRequest.LangEnum?> lang = default;
             Option<string?> customId = default;
-            Option<bool?> addRet = default;
+            Option<OtpRequest.DatacodingEnum?> datacoding = default;
 
             while (utf8JsonReader.Read())
             {
@@ -362,32 +394,28 @@ namespace BarisCemant.Verimor.Sms.Generated.Model
                         case "password":
                             password = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "messages":
-                            messages = new Option<List<SendSmsJsonRequestMessagesInner>?>(JsonSerializer.Deserialize<List<SendSmsJsonRequestMessagesInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "dest":
+                            dest = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "source_addr":
-                            sourceAddr = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "header":
+                            header = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "valid_for":
-                            validFor = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "code":
+                            code = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "datacoding":
-                            datacoding = new Option<SendSmsJsonRequest.DatacodingEnum?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (SendSmsJsonRequest.DatacodingEnum?)null : (SendSmsJsonRequest.DatacodingEnum)utf8JsonReader.GetInt32());
+                        case "msg":
+                            msg = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "is_commercial":
-                            isCommercial = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
-                            break;
-                        case "iys_recipient_type":
-                            iysRecipientType = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
-                        case "send_at":
-                            sendAt = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "lang":
+                            string? langRawValue = utf8JsonReader.GetString();
+                            if (langRawValue != null)
+                                lang = new Option<OtpRequest.LangEnum?>(OtpRequest.LangEnumFromStringOrDefault(langRawValue));
                             break;
                         case "custom_id":
                             customId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "add_ret":
-                            addRet = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                        case "datacoding":
+                            datacoding = new Option<OtpRequest.DatacodingEnum?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (OtpRequest.DatacodingEnum?)null : (OtpRequest.DatacodingEnum)utf8JsonReader.GetInt32());
                             break;
                         default:
                             break;
@@ -396,127 +424,111 @@ namespace BarisCemant.Verimor.Sms.Generated.Model
             }
 
             if (!username.IsSet)
-                throw new ArgumentException("Property is required for class SendSmsJsonRequest.", nameof(username));
+                throw new ArgumentException("Property is required for class OtpRequest.", nameof(username));
 
             if (!password.IsSet)
-                throw new ArgumentException("Property is required for class SendSmsJsonRequest.", nameof(password));
+                throw new ArgumentException("Property is required for class OtpRequest.", nameof(password));
 
-            if (!messages.IsSet)
-                throw new ArgumentException("Property is required for class SendSmsJsonRequest.", nameof(messages));
+            if (!dest.IsSet)
+                throw new ArgumentException("Property is required for class OtpRequest.", nameof(dest));
 
             if (username.IsSet && username.Value == null)
-                throw new ArgumentNullException(nameof(username), "Property is not nullable for class SendSmsJsonRequest.");
+                throw new ArgumentNullException(nameof(username), "Property is not nullable for class OtpRequest.");
 
             if (password.IsSet && password.Value == null)
-                throw new ArgumentNullException(nameof(password), "Property is not nullable for class SendSmsJsonRequest.");
+                throw new ArgumentNullException(nameof(password), "Property is not nullable for class OtpRequest.");
 
-            if (messages.IsSet && messages.Value == null)
-                throw new ArgumentNullException(nameof(messages), "Property is not nullable for class SendSmsJsonRequest.");
+            if (dest.IsSet && dest.Value == null)
+                throw new ArgumentNullException(nameof(dest), "Property is not nullable for class OtpRequest.");
 
-            if (sourceAddr.IsSet && sourceAddr.Value == null)
-                throw new ArgumentNullException(nameof(sourceAddr), "Property is not nullable for class SendSmsJsonRequest.");
+            if (header.IsSet && header.Value == null)
+                throw new ArgumentNullException(nameof(header), "Property is not nullable for class OtpRequest.");
 
-            if (validFor.IsSet && validFor.Value == null)
-                throw new ArgumentNullException(nameof(validFor), "Property is not nullable for class SendSmsJsonRequest.");
+            if (code.IsSet && code.Value == null)
+                throw new ArgumentNullException(nameof(code), "Property is not nullable for class OtpRequest.");
 
-            if (datacoding.IsSet && datacoding.Value == null)
-                throw new ArgumentNullException(nameof(datacoding), "Property is not nullable for class SendSmsJsonRequest.");
+            if (msg.IsSet && msg.Value == null)
+                throw new ArgumentNullException(nameof(msg), "Property is not nullable for class OtpRequest.");
 
-            if (isCommercial.IsSet && isCommercial.Value == null)
-                throw new ArgumentNullException(nameof(isCommercial), "Property is not nullable for class SendSmsJsonRequest.");
-
-            if (iysRecipientType.IsSet && iysRecipientType.Value == null)
-                throw new ArgumentNullException(nameof(iysRecipientType), "Property is not nullable for class SendSmsJsonRequest.");
-
-            if (sendAt.IsSet && sendAt.Value == null)
-                throw new ArgumentNullException(nameof(sendAt), "Property is not nullable for class SendSmsJsonRequest.");
+            if (lang.IsSet && lang.Value == null)
+                throw new ArgumentNullException(nameof(lang), "Property is not nullable for class OtpRequest.");
 
             if (customId.IsSet && customId.Value == null)
-                throw new ArgumentNullException(nameof(customId), "Property is not nullable for class SendSmsJsonRequest.");
+                throw new ArgumentNullException(nameof(customId), "Property is not nullable for class OtpRequest.");
 
-            if (addRet.IsSet && addRet.Value == null)
-                throw new ArgumentNullException(nameof(addRet), "Property is not nullable for class SendSmsJsonRequest.");
+            if (datacoding.IsSet && datacoding.Value == null)
+                throw new ArgumentNullException(nameof(datacoding), "Property is not nullable for class OtpRequest.");
 
-            return new SendSmsJsonRequest(username.Value!, password.Value!, messages.Value!, sourceAddr, validFor, datacoding, isCommercial, iysRecipientType, sendAt, customId, addRet);
+            return new OtpRequest(username.Value!, password.Value!, dest.Value!, header, code, msg, lang, customId, datacoding);
         }
 
         /// <summary>
-        /// Serializes a <see cref="SendSmsJsonRequest" />
+        /// Serializes a <see cref="OtpRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="sendSmsJsonRequest"></param>
+        /// <param name="otpRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, SendSmsJsonRequest sendSmsJsonRequest, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, OtpRequest otpRequest, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, sendSmsJsonRequest, jsonSerializerOptions);
+            WriteProperties(writer, otpRequest, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="SendSmsJsonRequest" />
+        /// Serializes the properties of <see cref="OtpRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="sendSmsJsonRequest"></param>
+        /// <param name="otpRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, SendSmsJsonRequest sendSmsJsonRequest, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, OtpRequest otpRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (sendSmsJsonRequest.Username == null)
-                throw new ArgumentNullException(nameof(sendSmsJsonRequest.Username), "Property is required for class SendSmsJsonRequest.");
+            if (otpRequest.Username == null)
+                throw new ArgumentNullException(nameof(otpRequest.Username), "Property is required for class OtpRequest.");
 
-            if (sendSmsJsonRequest.Password == null)
-                throw new ArgumentNullException(nameof(sendSmsJsonRequest.Password), "Property is required for class SendSmsJsonRequest.");
+            if (otpRequest.Password == null)
+                throw new ArgumentNullException(nameof(otpRequest.Password), "Property is required for class OtpRequest.");
 
-            if (sendSmsJsonRequest.Messages == null)
-                throw new ArgumentNullException(nameof(sendSmsJsonRequest.Messages), "Property is required for class SendSmsJsonRequest.");
+            if (otpRequest.Dest == null)
+                throw new ArgumentNullException(nameof(otpRequest.Dest), "Property is required for class OtpRequest.");
 
-            if (sendSmsJsonRequest.SourceAddrOption.IsSet && sendSmsJsonRequest.SourceAddr == null)
-                throw new ArgumentNullException(nameof(sendSmsJsonRequest.SourceAddr), "Property is required for class SendSmsJsonRequest.");
+            if (otpRequest.HeaderOption.IsSet && otpRequest.Header == null)
+                throw new ArgumentNullException(nameof(otpRequest.Header), "Property is required for class OtpRequest.");
 
-            if (sendSmsJsonRequest.ValidForOption.IsSet && sendSmsJsonRequest.ValidFor == null)
-                throw new ArgumentNullException(nameof(sendSmsJsonRequest.ValidFor), "Property is required for class SendSmsJsonRequest.");
+            if (otpRequest.CodeOption.IsSet && otpRequest.Code == null)
+                throw new ArgumentNullException(nameof(otpRequest.Code), "Property is required for class OtpRequest.");
 
-            if (sendSmsJsonRequest.IysRecipientTypeOption.IsSet && sendSmsJsonRequest.IysRecipientType == null)
-                throw new ArgumentNullException(nameof(sendSmsJsonRequest.IysRecipientType), "Property is required for class SendSmsJsonRequest.");
+            if (otpRequest.MsgOption.IsSet && otpRequest.Msg == null)
+                throw new ArgumentNullException(nameof(otpRequest.Msg), "Property is required for class OtpRequest.");
 
-            if (sendSmsJsonRequest.SendAtOption.IsSet && sendSmsJsonRequest.SendAt == null)
-                throw new ArgumentNullException(nameof(sendSmsJsonRequest.SendAt), "Property is required for class SendSmsJsonRequest.");
+            if (otpRequest.CustomIdOption.IsSet && otpRequest.CustomId == null)
+                throw new ArgumentNullException(nameof(otpRequest.CustomId), "Property is required for class OtpRequest.");
 
-            if (sendSmsJsonRequest.CustomIdOption.IsSet && sendSmsJsonRequest.CustomId == null)
-                throw new ArgumentNullException(nameof(sendSmsJsonRequest.CustomId), "Property is required for class SendSmsJsonRequest.");
+            writer.WriteString("username", otpRequest.Username);
 
-            writer.WriteString("username", sendSmsJsonRequest.Username);
+            writer.WriteString("password", otpRequest.Password);
 
-            writer.WriteString("password", sendSmsJsonRequest.Password);
+            writer.WriteString("dest", otpRequest.Dest);
 
-            writer.WritePropertyName("messages");
-            JsonSerializer.Serialize(writer, sendSmsJsonRequest.Messages, jsonSerializerOptions);
-            if (sendSmsJsonRequest.SourceAddrOption.IsSet)
-                writer.WriteString("source_addr", sendSmsJsonRequest.SourceAddr);
+            if (otpRequest.HeaderOption.IsSet)
+                writer.WriteString("header", otpRequest.Header);
 
-            if (sendSmsJsonRequest.ValidForOption.IsSet)
-                writer.WriteString("valid_for", sendSmsJsonRequest.ValidFor);
+            if (otpRequest.CodeOption.IsSet)
+                writer.WriteString("code", otpRequest.Code);
 
-            if (sendSmsJsonRequest.DatacodingOption.IsSet)
-                writer.WriteNumber("datacoding", SendSmsJsonRequest.DatacodingEnumToJsonValue(sendSmsJsonRequest.DatacodingOption.Value!.Value));
+            if (otpRequest.MsgOption.IsSet)
+                writer.WriteString("msg", otpRequest.Msg);
 
-            if (sendSmsJsonRequest.IsCommercialOption.IsSet)
-                writer.WriteBoolean("is_commercial", sendSmsJsonRequest.IsCommercialOption.Value!.Value);
+            if (otpRequest.LangOption.IsSet && otpRequest.LangOption.Value != null)
+                writer.WriteString("lang", OtpRequest.LangEnumToJsonValue(otpRequest.LangOption.Value!.Value));
+            if (otpRequest.CustomIdOption.IsSet)
+                writer.WriteString("custom_id", otpRequest.CustomId);
 
-            if (sendSmsJsonRequest.IysRecipientTypeOption.IsSet)
-                writer.WriteString("iys_recipient_type", sendSmsJsonRequest.IysRecipientType);
-
-            if (sendSmsJsonRequest.SendAtOption.IsSet)
-                writer.WriteString("send_at", sendSmsJsonRequest.SendAt);
-
-            if (sendSmsJsonRequest.CustomIdOption.IsSet)
-                writer.WriteString("custom_id", sendSmsJsonRequest.CustomId);
-
-            if (sendSmsJsonRequest.AddRetOption.IsSet)
-                writer.WriteBoolean("add_ret", sendSmsJsonRequest.AddRetOption.Value!.Value);
+            if (otpRequest.DatacodingOption.IsSet)
+                writer.WriteNumber("datacoding", OtpRequest.DatacodingEnumToJsonValue(otpRequest.DatacodingOption.Value!.Value));
         }
     }
 }
