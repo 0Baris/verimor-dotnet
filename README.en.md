@@ -70,6 +70,12 @@ var accepted = await whatsApp.SendOtpAsync("905000000000", "otp_template", "en",
 - Pass your own `HttpClient` through the `HttpClient` option; the SDK never disposes it or changes its settings.
 - Non-2xx responses raise `VerimorApiException`, unexpected 2xx bodies raise `UnexpectedResponseException`. Network and cancellation errors stay the native .NET exceptions.
 
+## Examples
+
+Every one of the 72 operations has a runnable example under [`examples/Operations/`](examples/Operations/); run one with `dotnet run --project examples -- sms/send`. Each file reads credentials from environment variables and the server from `VERIMOR_BASE_URL`, falling back to Verimor's server. `scripts/run_examples.py` runs all of them against a local recording server and never contacts Verimor.
+
+A single-file reference for AI assistants: [`llms.md`](llms.md).
+
 ## Documentation
 
 - [Installation](docs/en/installation.md) · [Configuration](docs/en/configuration.md) · [SMS](docs/en/sms.md) · [Switch](docs/en/switch.md) · [WhatsApp](docs/en/whatsapp.md)

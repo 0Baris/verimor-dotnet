@@ -23,6 +23,7 @@ jobs:
             10.0.x
       - run: dotnet build src/BarisCemant.Verimor/BarisCemant.Verimor.csproj -c Release
       - run: dotnet build examples/Examples.csproj -c Release
+      - run: python3 scripts/run_examples.py dotnet
       - run: dotnet test tests/BarisCemant.Verimor.Tests -c Release
 
   package-consumer:

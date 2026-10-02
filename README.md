@@ -70,6 +70,12 @@ var accepted = await whatsApp.SendOtpAsync("905000000000", "otp_template", "tr",
 - Kendi `HttpClient`'ınızı `HttpClient` seçeneğiyle verebilirsiniz; SDK onu kapatmaz ve ayarlarını değiştirmez.
 - 2xx dışındaki yanıtlar `VerimorApiException`, beklenmeyen 2xx gövdeleri `UnexpectedResponseException` olur. Ağ ve iptal hataları .NET'in kendi istisnaları olarak kalır.
 
+## Örnekler
+
+72 operasyonun her biri için çalıştırılabilir bir örnek [`examples/Operations/`](examples/Operations/) altındadır; biri şöyle çalışır: `dotnet run --project examples -- sms/send`. Her dosya kimlik bilgilerini ortam değişkenlerinden, sunucu adresini `VERIMOR_BASE_URL` değişkeninden okur; değişken yoksa Verimor'un sunucusuna gider. `scripts/run_examples.py` hepsini Verimor'a hiç bağlanmadan yerel bir kayıt sunucusuna karşı çalıştırır.
+
+Yapay zekâ asistanları için tek dosyalık başvuru: [`llms.md`](llms.md).
+
 ## Belgeler
 
 - [Kurulum](docs/tr/installation.md) · [Yapılandırma](docs/tr/configuration.md) · [SMS](docs/tr/sms.md) · [Switch](docs/tr/switch.md) · [WhatsApp](docs/tr/whatsapp.md)

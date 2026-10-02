@@ -2,6 +2,13 @@
 
 Bu proje [Semantic Versioning](https://semver.org/) kullanır. / This project follows Semantic Versioning.
 
+## 0.3.0
+
+- 72 operasyonun her biri için çalıştırılabilir örnek: `examples/Operations/<Ürün>/<Operasyon>.cs`; biri `dotnet run --project examples -- sms/send` ile çalışır. Örnekler sözleşmeden üretilir; CI hepsini Verimor'a bağlanmadan yerel bir kayıt sunucusuna karşı çalıştırıp her birinin belgelenen isteği gönderdiğini doğrular (`scripts/run_examples.py dotnet`).
+- Yapay zekâ asistanları için tek dosyalık başvuru: `llms.md`. Kütüphane kodu ve API'ler 0.2.1 ile aynıdır.
+- Runnable example for each of the 72 operations: `examples/Operations/<Product>/<Operation>.cs`; run one with `dotnet run --project examples -- sms/send`. The examples are generated from the contract; CI runs every one against a local recording server, without contacting Verimor, and checks each sends the documented request (`scripts/run_examples.py dotnet`).
+- A single-file reference for AI assistants: `llms.md`. Library code and APIs are unchanged from 0.2.1.
+
 ## 0.2.1
 
 - Sunucu adresi açıklamaları netleşti: varsayılan Verimor'un adresidir; kendi sunucunuz veya proxy için değiştirilebilir, IP, port ve alt yol korunur (testle doğrulandı).

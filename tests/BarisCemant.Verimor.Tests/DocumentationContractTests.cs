@@ -62,7 +62,10 @@ namespace BarisCemant.Verimor.Tests
             var turkish = Directory.GetFiles(Path.Combine(Root(), "docs", "tr")).Select(Path.GetFileName).OrderBy(n => n);
             var english = Directory.GetFiles(Path.Combine(Root(), "docs", "en")).Select(Path.GetFileName).OrderBy(n => n);
             Assert.Equal(turkish, english);
-            Assert.Equal(6, Directory.GetFiles(Path.Combine(Root(), "examples"), "*.cs").Length);
+            var examples = Path.Combine(Root(), "examples");
+            Assert.Equal(6, Directory.GetFiles(examples, "*.cs").Count(file => Path.GetFileName(file) != "Program.cs"));
+            Assert.Equal(72, Directory.GetDirectories(Path.Combine(examples, "Operations"))
+                .Sum(product => Directory.GetFiles(product, "*.cs").Length));
         }
     }
 }

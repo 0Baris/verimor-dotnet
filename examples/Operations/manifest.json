@@ -1,0 +1,722 @@
+[
+  {
+    "product": "sms",
+    "operationId": "post_v2_blacklists",
+    "method": "POST",
+    "path": "/v2/blacklists",
+    "key": "sms/addBlacklistEntry",
+    "files": {
+      "dotnet": "examples/Operations/Sms/AddBlacklistEntry.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "answerCallPost",
+    "method": "POST",
+    "path": "/answer",
+    "key": "switch/answer",
+    "files": {
+      "dotnet": "examples/Operations/Switch/Answer.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "answerCall",
+    "method": "GET",
+    "path": "/answer/{id}",
+    "key": "switch/answerLegacy",
+    "files": {
+      "dotnet": "examples/Operations/Switch/AnswerLegacy.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "get_v2_balance",
+    "method": "GET",
+    "path": "/v2/balance",
+    "key": "sms/balance",
+    "files": {
+      "dotnet": "examples/Operations/Sms/Balance.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createBridge",
+    "method": "GET",
+    "path": "/bridge",
+    "key": "switch/bridge",
+    "files": {
+      "dotnet": "examples/Operations/Switch/Bridge.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "post_v2_cancel_id",
+    "method": "POST",
+    "path": "/v2/cancel/{id}",
+    "key": "sms/cancel",
+    "files": {
+      "dotnet": "examples/Operations/Sms/Cancel.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createAnnouncement",
+    "method": "POST",
+    "path": "/announcements",
+    "key": "switch/createAnnouncement",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateAnnouncement.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createBlockedNumber",
+    "method": "POST",
+    "path": "/blocked_numbers",
+    "key": "switch/createBlockedNumber",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateBlockedNumber.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createContact",
+    "method": "POST",
+    "path": "/contacts",
+    "key": "switch/createContact",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateContact.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createContactGroup",
+    "method": "POST",
+    "path": "/contact_groups",
+    "key": "switch/createContactGroup",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateContactGroup.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createFaxDocumentUrl",
+    "method": "POST",
+    "path": "/fax_document_url",
+    "key": "switch/createFaxDocumentUrl",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateFaxDocumentUrl.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createFaxOrder",
+    "method": "POST",
+    "path": "/fax_orders",
+    "key": "switch/createFaxOrder",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateFaxOrder.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createIvrCampaign",
+    "method": "POST",
+    "path": "/ivr_campaigns.json",
+    "key": "switch/createIvrCampaign",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateIvrCampaign.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createRecordingUrl",
+    "method": "POST",
+    "path": "/recording_url",
+    "key": "switch/createRecordingUrl",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateRecordingUrl.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createVoicemailRecordingUrl",
+    "method": "POST",
+    "path": "/voicemail_recording_url",
+    "key": "switch/createVoicemailRecordingUrl",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateVoicemailRecordingUrl.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createWebphoneToken",
+    "method": "POST",
+    "path": "/webphone_tokens",
+    "key": "switch/createWebphoneToken",
+    "files": {
+      "dotnet": "examples/Operations/Switch/CreateWebphoneToken.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "deleteAnnouncement",
+    "method": "DELETE",
+    "path": "/announcements/{id}",
+    "key": "switch/deleteAnnouncement",
+    "files": {
+      "dotnet": "examples/Operations/Switch/DeleteAnnouncement.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "delete_v2_blacklists_id",
+    "method": "DELETE",
+    "path": "/v2/blacklists/{id}",
+    "key": "sms/deleteBlacklistEntry",
+    "files": {
+      "dotnet": "examples/Operations/Sms/DeleteBlacklistEntry.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "deleteBlockedNumber",
+    "method": "DELETE",
+    "path": "/blocked_numbers/delete",
+    "key": "switch/deleteBlockedNumber",
+    "files": {
+      "dotnet": "examples/Operations/Switch/DeleteBlockedNumber.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "deleteContact",
+    "method": "DELETE",
+    "path": "/contacts/{id}",
+    "key": "switch/deleteContact",
+    "files": {
+      "dotnet": "examples/Operations/Switch/DeleteContact.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "deleteContactGroup",
+    "method": "DELETE",
+    "path": "/contact_groups/{id}",
+    "key": "switch/deleteContactGroup",
+    "files": {
+      "dotnet": "examples/Operations/Switch/DeleteContactGroup.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "deleteIvrCampaign",
+    "method": "DELETE",
+    "path": "/ivr_campaigns/{id}.json",
+    "key": "switch/deleteIvrCampaign",
+    "files": {
+      "dotnet": "examples/Operations/Switch/DeleteIvrCampaign.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "downloadFaxDocument",
+    "method": "GET",
+    "path": "/fax_document/{id}",
+    "key": "switch/downloadFaxDocument",
+    "files": {
+      "dotnet": "examples/Operations/Switch/DownloadFaxDocument.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getCdr",
+    "method": "GET",
+    "path": "/cdrs/{id}",
+    "key": "switch/getCdr",
+    "files": {
+      "dotnet": "examples/Operations/Switch/GetCdr.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getCrmIntegrations",
+    "method": "GET",
+    "path": "/crm_integrations",
+    "key": "switch/getCrmIntegrations",
+    "files": {
+      "dotnet": "examples/Operations/Switch/GetCrmIntegrations.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getExtension",
+    "method": "GET",
+    "path": "/extensions/{id}",
+    "key": "switch/getExtension",
+    "files": {
+      "dotnet": "examples/Operations/Switch/GetExtension.cs"
+    }
+  },
+  {
+    "product": "whatsapp",
+    "operationId": "get_message_v1_messages__message_ref__get",
+    "method": "GET",
+    "path": "/v1/messages/{message_ref}",
+    "key": "whatsapp/getMessage",
+    "files": {
+      "dotnet": "examples/Operations/WhatsApp/GetMessage.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "webhookPayloadExamples",
+    "method": "GET",
+    "path": "/webhook-payload-examples",
+    "key": "switch/getWebhookPayloadExamples",
+    "files": {
+      "dotnet": "examples/Operations/Switch/GetWebhookPayloadExamples.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "hangupCall",
+    "method": "GET",
+    "path": "/hangup/{id}",
+    "key": "switch/hangup",
+    "files": {
+      "dotnet": "examples/Operations/Switch/Hangup.cs"
+    }
+  },
+  {
+    "product": "whatsapp",
+    "operationId": "health_health_get",
+    "method": "GET",
+    "path": "/health",
+    "key": "whatsapp/health",
+    "files": {
+      "dotnet": "examples/Operations/WhatsApp/Health.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "listAgentStatuses",
+    "method": "GET",
+    "path": "/agent_statuses",
+    "key": "switch/listAgentStatuses",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListAgentStatuses.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getAnnouncements",
+    "method": "GET",
+    "path": "/announcements",
+    "key": "switch/listAnnouncements",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListAnnouncements.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "get_v2_blacklists",
+    "method": "GET",
+    "path": "/v2/blacklists",
+    "key": "sms/listBlacklistEntries",
+    "files": {
+      "dotnet": "examples/Operations/Sms/ListBlacklistEntries.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "listBlockedNumbers",
+    "method": "GET",
+    "path": "/blocked_numbers",
+    "key": "switch/listBlockedNumbers",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListBlockedNumbers.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getCallerIds",
+    "method": "GET",
+    "path": "/caller_ids",
+    "key": "switch/listCallerIds",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListCallerIds.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getCdrs",
+    "method": "GET",
+    "path": "/cdrs",
+    "key": "switch/listCdrs",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListCdrs.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "listContactGroups",
+    "method": "GET",
+    "path": "/contact_groups",
+    "key": "switch/listContactGroups",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListContactGroups.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "listContacts",
+    "method": "GET",
+    "path": "/contacts",
+    "key": "switch/listContacts",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListContacts.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "listExtensions",
+    "method": "GET",
+    "path": "/extensions",
+    "key": "switch/listExtensions",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListExtensions.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "listFaxOrders",
+    "method": "GET",
+    "path": "/fax_orders",
+    "key": "switch/listFaxOrders",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListFaxOrders.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "listFdrs",
+    "method": "GET",
+    "path": "/fdrs",
+    "key": "switch/listFaxRecords",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListFaxRecords.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "get_v2_inbound_messages",
+    "method": "GET",
+    "path": "/v2/inbound_messages",
+    "key": "sms/listInboundMessages",
+    "files": {
+      "dotnet": "examples/Operations/Sms/ListInboundMessages.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "get_v2_iys_campaigns_id_consents",
+    "method": "GET",
+    "path": "/v2/iys/campaigns/{id}/consents",
+    "key": "sms/listIysCampaignConsents",
+    "files": {
+      "dotnet": "examples/Operations/Sms/ListIysCampaignConsents.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "get_v2_iys_campaigns",
+    "method": "GET",
+    "path": "/v2/iys/campaigns",
+    "key": "sms/listIysCampaigns",
+    "files": {
+      "dotnet": "examples/Operations/Sms/ListIysCampaigns.cs"
+    }
+  },
+  {
+    "product": "whatsapp",
+    "operationId": "list_messages_v1_messages_get",
+    "method": "GET",
+    "path": "/v1/messages",
+    "key": "whatsapp/listMessages",
+    "files": {
+      "dotnet": "examples/Operations/WhatsApp/ListMessages.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getQueuesPending",
+    "method": "GET",
+    "path": "/queues/pending",
+    "key": "switch/listQueuePendingCalls",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListQueuePendingCalls.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getQueueUserList",
+    "method": "GET",
+    "path": "/queue/user_list",
+    "key": "switch/listQueueUsers",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListQueueUsers.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getQueues",
+    "method": "GET",
+    "path": "/queues",
+    "key": "switch/listQueues",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListQueues.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "get_v2_headers",
+    "method": "GET",
+    "path": "/v2/headers",
+    "key": "sms/listSenderIds",
+    "files": {
+      "dotnet": "examples/Operations/Sms/ListSenderIds.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "listUserStatuses",
+    "method": "GET",
+    "path": "/user_statuses",
+    "key": "switch/listUserStatuses",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListUserStatuses.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "getVoicemailMessages",
+    "method": "GET",
+    "path": "/voicemail_messages",
+    "key": "switch/listVoicemailMessages",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ListVoicemailMessages.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "manageQueueUsers",
+    "method": "GET",
+    "path": "/queue/manage_users",
+    "key": "switch/manageQueueUsers",
+    "files": {
+      "dotnet": "examples/Operations/Switch/ManageQueueUsers.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "originateCallPost",
+    "method": "POST",
+    "path": "/originate",
+    "key": "switch/originate",
+    "files": {
+      "dotnet": "examples/Operations/Switch/Originate.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "originateCall",
+    "method": "GET",
+    "path": "/originate",
+    "key": "switch/originateLegacy",
+    "files": {
+      "dotnet": "examples/Operations/Switch/OriginateLegacy.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "sendSmsJson",
+    "method": "POST",
+    "path": "/v2/send.json",
+    "key": "sms/send",
+    "files": {
+      "dotnet": "examples/Operations/Sms/Send.cs"
+    }
+  },
+  {
+    "product": "whatsapp",
+    "operationId": "send_bulk_v1_messages_bulk_post",
+    "method": "POST",
+    "path": "/v1/messages/bulk",
+    "key": "whatsapp/sendBulk",
+    "files": {
+      "dotnet": "examples/Operations/WhatsApp/SendBulk.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "get_v2_send",
+    "method": "GET",
+    "path": "/v2/send",
+    "key": "sms/sendLegacy",
+    "files": {
+      "dotnet": "examples/Operations/Sms/SendLegacy.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "sendOtp",
+    "method": "POST",
+    "path": "/v2/otp",
+    "key": "sms/sendOtp",
+    "files": {
+      "dotnet": "examples/Operations/Sms/SendOtp.cs"
+    }
+  },
+  {
+    "product": "whatsapp",
+    "operationId": "send_otp_v1_messages_otp_post",
+    "method": "POST",
+    "path": "/v1/messages/otp",
+    "key": "whatsapp/sendOtp",
+    "files": {
+      "dotnet": "examples/Operations/WhatsApp/SendOtp.cs"
+    }
+  },
+  {
+    "product": "whatsapp",
+    "operationId": "send_utility_v1_messages_utility_post",
+    "method": "POST",
+    "path": "/v1/messages/utility",
+    "key": "whatsapp/sendUtility",
+    "files": {
+      "dotnet": "examples/Operations/WhatsApp/SendUtility.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "muteCall",
+    "method": "GET",
+    "path": "/mute/{id}",
+    "key": "switch/setCallMute",
+    "files": {
+      "dotnet": "examples/Operations/Switch/SetCallMute.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "createDnd",
+    "method": "GET",
+    "path": "/dnd/{id}",
+    "key": "switch/setDnd",
+    "files": {
+      "dotnet": "examples/Operations/Switch/SetDnd.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "getSmsStatus",
+    "method": "GET",
+    "path": "/v2/status",
+    "key": "sms/status",
+    "files": {
+      "dotnet": "examples/Operations/Sms/Status.cs"
+    }
+  },
+  {
+    "product": "sms",
+    "operationId": "post_v2_iys_consents_json",
+    "method": "POST",
+    "path": "/v2/iys_consents.json",
+    "key": "sms/submitIysConsents",
+    "files": {
+      "dotnet": "examples/Operations/Sms/SubmitIysConsents.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "transferCallPost",
+    "method": "POST",
+    "path": "/transfer",
+    "key": "switch/transfer",
+    "files": {
+      "dotnet": "examples/Operations/Switch/Transfer.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "transferCall",
+    "method": "GET",
+    "path": "/transfer/{id}",
+    "key": "switch/transferLegacy",
+    "files": {
+      "dotnet": "examples/Operations/Switch/TransferLegacy.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "updateAnnouncement",
+    "method": "PATCH",
+    "path": "/announcements/{id}",
+    "key": "switch/updateAnnouncement",
+    "files": {
+      "dotnet": "examples/Operations/Switch/UpdateAnnouncement.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "updateContact",
+    "method": "PATCH",
+    "path": "/contacts/{id}",
+    "key": "switch/updateContact",
+    "files": {
+      "dotnet": "examples/Operations/Switch/UpdateContact.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "updateContactGroup",
+    "method": "PATCH",
+    "path": "/contact_groups/{id}",
+    "key": "switch/updateContactGroup",
+    "files": {
+      "dotnet": "examples/Operations/Switch/UpdateContactGroup.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "updateCrmIntegrations",
+    "method": "POST",
+    "path": "/crm_integrations",
+    "key": "switch/updateCrmIntegrations",
+    "files": {
+      "dotnet": "examples/Operations/Switch/UpdateCrmIntegrations.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "updateIvrCampaign",
+    "method": "PATCH",
+    "path": "/ivr_campaigns/{id}.json",
+    "key": "switch/updateIvrCampaign",
+    "files": {
+      "dotnet": "examples/Operations/Switch/UpdateIvrCampaign.cs"
+    }
+  },
+  {
+    "product": "switch",
+    "operationId": "updateOutboundCallerId",
+    "method": "GET",
+    "path": "/update_outbound_caller_id",
+    "key": "switch/updateOutboundCallerId",
+    "files": {
+      "dotnet": "examples/Operations/Switch/UpdateOutboundCallerId.cs"
+    }
+  }
+]
