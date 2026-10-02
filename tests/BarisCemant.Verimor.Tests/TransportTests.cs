@@ -46,24 +46,28 @@ namespace BarisCemant.Verimor.Tests
         {
             using var server = LoopbackServer.Respond(200, "{}", delay: TimeSpan.FromSeconds(5));
             var transport = new VerimorTransport(new ClientOptions(), server.Uri);
-            using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(100));
+            using var cts = new CancellationTokenSource();
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                transport.SendAsync(TransportRequest.Get("/v2/balance"), cts.Token));
+            // Cancel only after the server holds the request, so the test never races the network.
+            var sending = transport.SendAsync(TransportRequest.Get("/v2/balance"), cts.Token);
+            await server.FirstRequest.WaitAsync(TimeSpan.FromSeconds(10));
+            cts.Cancel();
 
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => sending);
             Assert.Equal(1, server.RequestCount);
         }
 
         [Fact]
         public async Task Timeout_is_native_and_not_retried()
         {
-            using var server = LoopbackServer.Respond(200, "{}", delay: TimeSpan.FromSeconds(5));
+            using var server = LoopbackServer.Respond(200, "{}", delay: TimeSpan.FromSeconds(8));
             var transport = new VerimorTransport(
-                new ClientOptions { Timeout = TimeSpan.FromMilliseconds(150) }, server.Uri);
+                new ClientOptions { Timeout = TimeSpan.FromSeconds(2) }, server.Uri);
 
             await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
                 transport.SendAsync(TransportRequest.Get("/v2/balance"), CancellationToken.None));
 
+            await server.FirstRequest.WaitAsync(TimeSpan.FromSeconds(10));
             Assert.Equal(1, server.RequestCount);
         }
 

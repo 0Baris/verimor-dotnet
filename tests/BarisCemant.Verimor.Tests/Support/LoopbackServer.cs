@@ -28,6 +28,8 @@ namespace BarisCemant.Verimor.Tests.Support
         private readonly byte[] _body;
         private readonly string _contentType;
         private readonly TimeSpan _delay;
+        private readonly TaskCompletionSource<bool> _received =
+            new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
 
         private LoopbackServer(int status, byte[] body, string contentType, TimeSpan delay)
         {
@@ -46,6 +48,9 @@ namespace BarisCemant.Verimor.Tests.Support
         }
 
         public Uri Uri { get; }
+
+        /// <summary>Completes once the first request has been recorded.</summary>
+        public Task FirstRequest => _received.Task;
 
         public int RequestCount
         {
@@ -105,6 +110,7 @@ namespace BarisCemant.Verimor.Tests.Support
                 }
 
                 lock (_gate) { _requests.Add(recorded); }
+                _received.TrySetResult(true);
                 if (_delay > TimeSpan.Zero)
                 {
                     await Task.Delay(_delay).ConfigureAwait(false);
