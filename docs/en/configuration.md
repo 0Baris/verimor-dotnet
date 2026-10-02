@@ -4,7 +4,7 @@ Each product has its own options class; all derive from `ClientOptions`.
 
 | Option | Meaning |
 | --- | --- |
-| `BaseUri` | Overrides the product's default address (for example a local test server). |
+| `BaseUri` | Server address. Defaults to Verimor's address for the product; set it to use another server such as a proxy. An IP, a port and a path prefix are kept. |
 | `Timeout` | Per-request time limit; 30 seconds by default. Zero or negative values are rejected. |
 | `HttpClient` | A client you own. The SDK never disposes it and never touches its `Timeout` or default headers. |
 

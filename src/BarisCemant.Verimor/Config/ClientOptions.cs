@@ -6,7 +6,7 @@ namespace BarisCemant.Verimor
     /// <summary>Options shared by every product client.</summary>
     public class ClientOptions
     {
-        /// <summary>Overrides the product's default base address (for example a local test server).</summary>
+        /// <summary>Server address; defaults to Verimor's address for the product. An IP, a port and a path prefix are kept.</summary>
         public Uri? BaseUri { get; set; }
 
         /// <summary>Per-request timeout. Defaults to 30 seconds. The SDK never retries.</summary>
